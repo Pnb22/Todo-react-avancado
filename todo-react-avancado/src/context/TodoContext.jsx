@@ -1,47 +1,42 @@
-import { createContext, useContext, useState, useMemo } from 'react'
-import useLocalStorage from '../hooks/useLocalStorage'
+// src/context/TodoContext.jsx
+import { createContext, useContext, useMemo, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
-const TodoContext = createContext()
+const TodoContext = createContext(null);
 
-export const TodoProvider = ({ children }) => {
-  const [todos, setTodos] = useLocalStorage('todos', [])
-  const [filter, setFilter] = useState('all')
+export function TodoProvider({ children }) {
+  const [todos, setTodos] = useLocalStorage("todos", []);
+  const [filter, setFilter] = useState("all"); // all | done | pending
 
-  const addTodo = (text) => {
-    setTodos([...todos, { id: Date.now(), text, completed: false }])
-  }
+  const addTodo = (title) => {
+    const trimmed = title.trim();
+    if (!trimmed) return;
+    setTodos((prev) => [
+      { id: crypto.randomUUID(), title: trimmed, done: false },
+      ...prev,
+    ]);
+  };
 
   const toggleTodo = (id) => {
-    setTodos(
-      todos.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    )
-  }
+    setTodos((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
+    );
+  };
 
   const removeTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id))
-  }
+    setTodos((prev) => prev.filter((t) => t.id !== id));
+  };
 
-  const filteredTodos = useMemo(() => {
-    if (filter === 'completed') return todos.filter(t => t.completed)
-    if (filter === 'pending') return todos.filter(t => !t.completed)
-    return todos
-  }, [todos, filter])
+  const value = useMemo(
+    () => ({ todos, filter, setFilter, addTodo, toggleTodo, removeTodo }),
+    [todos, filter]
+  );
 
-  return (
-    <TodoContext.Provider value={{
-      todos: filteredTodos,
-      addTodo,
-      toggleTodo,
-      removeTodo,
-      setFilter,
-      filter
-    }}>
-      {children}
-    </TodoContext.Provider>
-  )
+  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 }
 
-export const useTodos = () => useContext(TodoContext)
-
+export function useTodos() {
+  const ctx = useContext(TodoContext);
+  if (!ctx) throw new Error("useTodos deve ser usado dentro de <TodoProvider />");
+  return ctx;
+}

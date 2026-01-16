@@ -1,25 +1,21 @@
-import { useState } from 'react'
-import { useTodos } from '../context/TodoContext'
+// src/components/TodoForm.jsx
+import { useState } from "react";
+import { useTodos } from "../context/TodoContext";
 
 export default function TodoForm() {
-  const [text, setText] = useState('')
-  const { addTodo } = useTodos()
+  const [text, setText] = useState("");
+  const { addTodo } = useTodos();
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!text.trim()) return
-    addTodo(text)
-    setText('')
-  }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addTodo(text);
+    setText("");
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Nova tarefa"
-      />
-      <button>Adicionar</button>
+    <form onSubmit={onSubmit}>
+      <input value={text} onChange={(e) => setText(e.target.value)} />
+      <button type="submit">Adicionar</button>
     </form>
-  )
+  );
 }

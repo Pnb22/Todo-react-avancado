@@ -1,15 +1,15 @@
-import { TodoProvider } from './context/TodoContext'
-import TodoForm from './components/TodoForm'
-import TodoList from './components/TodoList'
-import TodoFilters from './components/TodoFilters'
+// src/App.jsx
+import { TodoProvider } from "./context/TodoContext";
+import TodoForm from "./components/TodoForm";
+import TodoFilters from "./components/TodoFilters";
+import TodoList from "./components/TodoList";
 
 export default function App() {
   return (
     <TodoProvider>
-      <h1>Todo React Avançado</h1>
       <TodoForm />
       <TodoFilters />
       <TodoList />
     </TodoProvider>
-  )
+  );
 }

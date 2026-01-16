@@ -1,0 +1,72 @@
+/* ============================================
+   TODOFORM.CSS - Estilos do Formulário
+   ============================================ */
+
+.todo-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: slideInLeft 0.5s ease;
+}
+
+.todo-form input {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.todo-form input::placeholder {
+  color: var(--text-secondary);
+}
+
+.todo-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.todo-form button {
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+}
+
+.todo-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.todo-form button:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   FORM - RESPONSIVE
+   ============================================ */
+
+@media (max-width: 480px) {
+  .todo-form {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .todo-form button {
+    width: 100%;
+  }
+
+  .todo-form input {
+    font-size: 16px; /* Evita zoom no mobile */
+  }
+}
