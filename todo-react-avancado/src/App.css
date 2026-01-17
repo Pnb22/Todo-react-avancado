@@ -1,23 +1,18 @@
-/* ============================================
-   APP.CSS - Estilos Globais e Estrutura
-   ============================================ */
-
+/* ROOT STYLES */
 :root {
   --primary-color: #6366f1;
   --primary-dark: #4f46e5;
   --primary-light: #818cf8;
   --success-color: #10b981;
   --danger-color: #ef4444;
-  --warning-color: #f59e0b;
   --bg-primary: #ffffff;
   --bg-secondary: #f9fafb;
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --border-color: #e5e7eb;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -27,168 +22,257 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   color: var(--text-primary);
 }
 
-html {
-  scroll-behavior: smooth;
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
-
-/* ============================================
-   APP CONTAINER
-   ============================================ */
 
 .App {
-  min-height: 100vh;
-  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
 }
 
-.app-container {
-  width: 100%;
-  max-width: 600px;
-  background: var(--bg-primary);
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
-  padding: 2rem;
-  animation: slideUp 0.5s ease;
-}
-
-/* ============================================
-   HEADER
-   ============================================ */
-
+/* ===== HEADER ===== */
 .app-header {
+  background: var(--bg-primary);
+  padding: 50px 30px 30px;
+  border-radius: 20px 20px 0 0;
   text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 4px solid var(--primary-color);
+  box-shadow: var(--shadow-lg);
 }
 
 .app-header h1 {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 10px;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -0.5px;
 }
 
 .app-header p {
   color: var(--text-secondary);
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
-/* ============================================
-   BUTTONS - GLOBAL STYLES
-   ============================================ */
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: var(--transition);
-  outline: none;
+/* ===== MAIN CONTENT ===== */
+.app-main {
+  background: var(--bg-primary);
+  padding: 40px;
+  border-radius: 0 0 20px 20px;
+  box-shadow: var(--shadow-xl);
 }
 
-button:active {
-  transform: scale(0.98);
+/* ===== FORM ===== */
+.todo-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 35px;
+  animation: slideUp 0.5s ease;
 }
 
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 0.75rem 1.5rem;
+.todo-form input {
+  flex: 1;
+  padding: 14px 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
   font-size: 1rem;
-}
-
-.btn-primary:hover:not(:disabled) {
-  background-color: var(--primary-dark);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-secondary {
   background-color: var(--bg-secondary);
   color: var(--text-primary);
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-.btn-secondary:hover:not(:disabled) {
-  background-color: var(--border-color);
+.todo-form input:focus {
+  outline: none;
   border-color: var(--primary-color);
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
 }
 
-.btn-danger {
-  background-color: var(--danger-color);
+.todo-form button {
+  padding: 14px 35px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
   color: white;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
-.btn-danger:hover:not(:disabled) {
-  background-color: #dc2626;
+.todo-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(99, 102, 241, 0.4);
+}
+
+/* ===== FILTERS ===== */
+.todo-filters {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.todo-filters button {
+  padding: 10px 26px;
+  border-radius: 25px;
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.todo-filters button:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: rgba(99, 102, 241, 0.05);
+  transform: translateY(-2px);
+}
+
+.todo-filters button:disabled {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+  border-color: var(--primary-color);
   box-shadow: var(--shadow-md);
 }
 
-/* ============================================
-   FORM ELEMENTS
-   ============================================ */
-
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: inherit;
-  color: var(--text-primary);
-  transition: var(--transition);
-  background-color: var(--bg-primary);
+/* ===== LIST ===== */
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+.todo-list-empty {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-secondary);
 }
 
-input[type="checkbox"] {
+.todo-list-empty-icon {
+  font-size: 4rem;
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+.todo-list-empty p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ===== TODO ITEM ===== */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, #fafafa 100%);
+  border-radius: 12px;
+  border-left: 5px solid var(--primary-color);
+  transition: all 0.3s ease;
+  animation: slideInLeft 0.3s ease;
+  box-shadow: var(--shadow-md);
+}
+
+.todo-item:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateX(6px);
+  border-left-color: var(--primary-light);
+  background: linear-gradient(135deg, white 0%, var(--bg-secondary) 100%);
+}
+
+.todo-item.completed {
+  border-left-color: var(--success-color);
+  opacity: 0.75;
+}
+
+.todo-item-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-item-checkbox {
+  width: 22px;
+  height: 22px;
   cursor: pointer;
-  width: 20px;
-  height: 20px;
   accent-color: var(--primary-color);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
-/* ============================================
-   ANIMATIONS
-   ============================================ */
+.todo-item-checkbox:hover {
+  transform: scale(1.1);
+}
 
+.todo-item-text {
+  font-size: 1rem;
+  color: var(--text-primary);
+  word-break: break-word;
+  font-weight: 500;
+  flex: 1;
+}
+
+.todo-item.completed .todo-item-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+.todo-item-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.todo-item-delete {
+  background-color: var(--danger-color);
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.todo-item-delete:hover {
+  background-color: #dc2626;
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ===== ANIMATIONS ===== */
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -200,19 +284,10 @@ input[type="checkbox"] {
   }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-15px);
   }
   to {
     opacity: 1;
@@ -220,69 +295,60 @@ input[type="checkbox"] {
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* ============================================
-   LOGO ANIMATIONS (Mantido do original)
-   ============================================ */
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .app-container {
-    padding: 1.5rem;
-  }
-
   .app-header h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
-  .App {
-    padding: 1rem;
+  .app-main {
+    padding: 25px;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  .todo-form button {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .app-container {
-    padding: 1rem;
-    border-radius: 8px;
+  #root {
+    padding: 10px;
+  }
+
+  .App {
+    max-width: 100%;
+  }
+
+  .app-header {
+    padding: 30px 20px 20px;
   }
 
   .app-header h1 {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
   }
 
-  button {
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
+  .app-main {
+    padding: 15px;
   }
 
-  input[type="text"],
-  textarea {
-    font-size: 16px; /* Previne zoom em inputs no mobile */
+  .todo-form input {
+    font-size: 16px;
+  }
+
+  .todo-filters button {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+  }
+
+  .todo-item {
+    padding: 12px 14px;
+  }
+
+  .todo-item-text {
+    font-size: 0.95rem;
   }
 }
